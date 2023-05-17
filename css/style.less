@@ -1,0 +1,110 @@
+*, *::before, ::after {
+  box-sizing: border-box;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+:root {
+  --hue-neutral: 200;
+  --hue-wrong: 0;
+  --hue-correct:145;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  min-height: 600px;
+  justify-content: center;
+  align-items: center;
+  background-color: #2A484E;
+}
+
+#question {
+  color: white;
+  background-color: #377375;
+  text-align: center;
+  border-radius: 10px;
+  font-size: 30px;
+  @media only screen and (max-width:600px) {
+      font-size: 20px;
+  }
+}
+.baby {
+  color: white;
+  font-size: 35px;
+  text-align: center;
+  @media only screen and (max-width:600px) {
+      font-size: 25px;
+  }
+}
+
+.btn {
+  cursor: pointer;
+  font-size: 30px;
+  @media only screen and (max-width: 600px) {
+          font-size: 18px;
+  }
+}
+
+.container {
+  width: 800px;
+  max-width: 80%;
+  background: white;
+  border-radius: 5px;
+  padding: 10px;
+  box-shadow: 0 0 20px 2px white;
+  background: #829D93;
+  .btn-grid {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    gap: 13px;
+    margin: 20px 0;
+  }
+  
+  .btn {
+    background: #377375;
+    color: white;
+    border: 3px solid rgb(252, 252, 252);
+    border-radius: 5px;
+    padding: 5px 10px ;
+  }
+  
+  .btn:hover {
+    border-color: #2a484e;
+    box-shadow: inset 600px 0 377375;
+    transition: all ease .8s;
+  }
+
+  .start-btn {
+    font-size: 30px;
+    font-weight: bold;
+    padding: 10px 30%;
+    display: flex;
+    align-items: center;
+    border: none;
+  } 
+
+  .next-btn {
+    font-size: 25px;
+    font-weight: bold;
+    padding: 20px 40px;
+  }
+  
+  .controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 13px;  
+  }
+
+  .hide {
+    display: none;
+  }
+}
+
+  #score {
+    font-size: 20px;
+    text-align: center;
+}

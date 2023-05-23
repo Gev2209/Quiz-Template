@@ -5,6 +5,14 @@ const questionElement = document.getElementById("question");
 const answersButtonElement = document.getElementById("answer-buttons");
 const scoreElement = document.getElementById("score");
 const messageElement = document.getElementById("message");
+const trueSound = document.getElementById('trueSound')
+const falseSound = document.getElementById('falseSound')
+const audioElements = document.querySelectorAll('audio')
+const questionContainer = document.getElementById('questionContainer')
+const yes = document.getElementById('yes')
+const no = document.getElementById('no')
+
+
 
 let shuffleQuestions, currentQuestionIndex, score
 let answerSelected = false; // Track if an answer has been selected
@@ -16,12 +24,12 @@ nextButton.addEventListener("click", () => {
     showMessage("Please select an answer."); // Display message if no answer is selected
     return; // Exit the function if an answer has not been selected
   }
+ 
     currentQuestionIndex++;
     if (currentQuestionIndex < shuffleQuestions.length) {
       setNextQuestion();
     } else {
       showScore();
-      isQuizFinished = true;
       nextButton.style.display = "none";
     }
 })
@@ -54,10 +62,13 @@ function showQuestion (question) {
 }
 
 function setNextQuestion () {
+ 
   resetState();
   answerSelected = false;
   messageElement.innerText = "";
   showQuestion(shuffleQuestions[currentQuestionIndex])
+  let currentTime = 0 
+  
 }
 
 function resetState () {
@@ -68,10 +79,6 @@ function resetState () {
 }
 
 function selectAnswer (e) {
-  if (answerSelected) {
-    return; // Exit the function if an answer has already been selected
-  }
-
   answerSelected = true; // Set the answer selection tracker to true
   const selectButton = e.target;
   const correct = selectButton.dataset.correct;
@@ -81,15 +88,38 @@ function selectAnswer (e) {
     button.disabled = true; // Disable all answer buttons
     setStatusClass(button, button.dataset.correct);
   })
+  questionContainer.style.display = 'block'
+  no.addEventListener('click', function () {
+    questionContainer.style.display = 'none'
+    answerSelected = false; // Reset the answer selection tracker to false
+    selectButton.disabled = false; // Enable the current answer button
+    clearStatusClass(selectButton);
+  })
 
-  if (correct) {
-    score++;
-    selectButton.style.backgroundColor = "green";
-  } else {
-    selectButton.style.backgroundColor = "red";
+
+
+  yes.addEventListener('click', function () {
+    questionContainer.style.display = 'none'
+    if (!audioElements.paused) {
+      audioElements.forEach(audio => {
+          audio.pause();
+          audio.currentTime = 0;
+      });
   }
+    if (correct) {
+      score++;
+      selectButton.style.backgroundColor = "green";
+      trueSound.play()
+    } 
+    else {
+      selectButton.style.backgroundColor = "red";
+      falseSound.play()
+    }
+  })
+
     nextButton.classList.remove("hide");
 }
+
 
 function showScore () {
   startButton.innerText = "Restart";
@@ -97,7 +127,6 @@ function showScore () {
   nextButton.classList.add("hide");
   questionContainerElements.classList.add("hide");
   scoreElement.innerText = `You scored ${score} out of ${questions.length}`
-  nextButton.classList.add("hide");
   nextButton.disabled = true; // Disable the Next button
 }
 

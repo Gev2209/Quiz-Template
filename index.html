@@ -8,6 +8,13 @@
     <title>Quiz App</title>
 </head>
 <body class="correct">
+    <div id="questionContainer">
+        <div id="noYes">
+            <p>Is your final answer?</p>
+            <button id="yes" class="yesno">Yes</button>
+            <button id="no" class="yesno">No</button>
+        </div>
+    </div>
     <div class="container">
         <div id="question-container" class="hide">
             <p class="baby">Check your knowledge!</p>
@@ -26,6 +33,10 @@
         <div id="score"></div>
         <div id="message"></div>
     </div>
+
+    <audio src="./sounds/mixkit-fast-small-sweep-transition-166.wav" id="trueSound"></audio>
+    <audio src="./sounds/mixkit-crowd-laugh-424.wav" id="falseSound"></audio>
+
     <script src="./script/index.js"></script>
 </body>
 </html>
